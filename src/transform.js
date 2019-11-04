@@ -43,7 +43,9 @@ export let hasSelection = () => {
 // }
 
 function getInputSelection(el) {
-    var start = 0, end = 0, normalizedValue, range,
+    var start = 0,
+        end = 0,
+        normalizedValue, range,
         textInputRange, len, endRange;
 
     if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
@@ -99,25 +101,96 @@ export function getSel() // javascript
     // obtain the selected text
     var sel = txtarea.value.substring(start, finish);
     // do something with the selected content
-    return sel;
+    return {
+        start: start,
+        end: finish,
+        sel: sel
+    };
 }
 
+
+function getSelectionHtml() {
+    var html = "";
+    if (typeof window.getSelection != "undefined") {
+        var sel = window.getSelection();
+        if (sel.rangeCount) {
+            var container = document.createElement("div");
+            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                container.appendChild(sel.getRangeAt(i).cloneContents());
+            }
+            html = container.innerHTML;
+        }
+    } else if (typeof document.selection != "undefined") {
+        if (document.selection.type == "Text") {
+            html = document.selection.createRange().htmlText;
+        }
+    }
+    return html;
+}
+
+function replaceSelectionWithHtml(html) {
+        var range;
+        if (window.getSelection && window.getSelection().getRangeAt) {
+            console.log("X")
+            range = window.getSelection().getRangeAt(0);
+            range.deleteContents();
+            var div = document.createElement("div");
+            div.innerHTML = html;
+            var frag = document.createDocumentFragment(),
+                child;
+            while ((child = div.firstChild)) {
+                frag.appendChild(child);
+            }
+            range.insertNode(frag);
+        } else if (document.selection && document.selection.createRange) {
+            console.log("Y")
+            range = document.selection.createRange();
+            range.pasteHTML(html);
+        }
+    }
+
 export function RST(font) {
-    let el = document.getElementById("intext");
-    var sel = getInputSelection(el), val = el.innerHTML;
-    el.innerHTML = val.slice(0, sel.start) + Convert(font , getSel()).join('') + val.slice(sel.end);
+    // let el = document.getElementById("intext");
+    // var sel = getSel(), val = el.innerHTML;
+    // // console.log(sel , val);
+    // let x = document.createElement('div');
+    // x.innerHTML = Convert(font , sel.sel).join("");
+    // let z = x.innerHTML;
+    // console.log(Convert(font , sel.sel).join(""))
+
+    // document.execCommand('insertText', false, "hello")
+    // el.value = val.slice(0, sel.start) + "" + z + "" + val.slice(sel.end);
+
+    // console.log(el.innerHTML ,el.innerText , el.value);
+
     // console.log(Convert(font , getSel()).join(''));
+    if (getSelectionHtml()){
+        replaceSelectionWithHtml(Convert(font , getSelectionHtml()).join(""));
+    }else{
+        const grid = document.getElementById("intext");
+        grid.innerHTML = Convert(font , grid.innerText).join("");
+    }
+
+    
+
+    // if (document.selection && document.selection.createRange) {
+    //     range = document.selection.createRange();
+    //     range.text = font;
+    //     console.log("X")
+    // }else{
+    //     console.log("Y")
+    // }
 }
 
 //----- END -------
 
-function display(converted) {
-    // Join string of new unicode characters
-    let newString = converted.join('');
-    const grid = document.getElementById("intext");
-    // Add new characters to the grid
-    grid.innerHTML = newString;
-}
+// function WriteAll(converted) {
+//     // Join string of new unicode characters
+//     let newString = converted.join('');
+//     const grid = document.getElementById("intext");
+//     // Add new characters to the grid
+//     grid.innerHTML = newString;
+// }
 
 // FONT LISTS
 //-------------------
@@ -136,13 +209,15 @@ let ALPHAS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', '
 //===============
 
 export let Convert = (font, string) => {
+    // let font = parseInt(font);
+    // console.log(typeof font)
     let C = []; // Converted List of Letters
     string.split('').forEach(e => {
         let i = ALPHAS.indexOf(e);
         if (i > -1) {
-            C.push("&#" + font + i + ";");
+            C.push("&#" + (parseInt(font + i)) + ";");
         } else {
-            C.push(element);
+            C.push(e);
         }
     });
 
