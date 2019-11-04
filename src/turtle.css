@@ -60,6 +60,14 @@ form,
     border-radius: 16px;
 }
 
+.banner {
+  width: auto;
+  height: auto;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 input {
     display: block;
     margin-bottom: 10px;
