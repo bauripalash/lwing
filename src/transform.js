@@ -182,6 +182,11 @@ export function RST(font) {
     // }
 }
 
+// Office - 1,8,9
+// Casual - 2,3,4,5
+// Frakur - 6,10
+// Hand - 7
+
 //----- END -------
 
 // function WriteAll(converted) {
@@ -196,11 +201,19 @@ export function RST(font) {
 //-------------------
 
 // UNICODE FONT LIST
-export let FONTS = [9424, 120432, 120380, 120328, 120276, 120224, 120172, 120016, 119912, 119808];
+export let FONTS = [120432, 120380, 120328, 120276, 120224, 120172, 120016, 119912, 119808 , 120068];
 
 // ALPHABET LIST
 let ALPHAS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
+let FRAKUR_REPLACE_LIST = {
+    2 : "&#8493;", //C
+    7 : "&#8460;" , //H
+    8 : "&#8465;" , //I
+    17 : "&#8476;" , //R
+    25 : "&#8488;" //Z
+
+}
 //----- END ------ 
 
 
@@ -209,13 +222,20 @@ let ALPHAS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', '
 //===============
 
 export let Convert = (font, string) => {
-    // let font = parseInt(font);
-    // console.log(typeof font)
     let C = []; // Converted List of Letters
     string.split('').forEach(e => {
         let i = ALPHAS.indexOf(e);
         if (i > -1) {
-            C.push("&#" + (parseInt(font + i)) + ";");
+            if (font==120068){
+                if (Object.keys(FRAKUR_REPLACE_LIST).indexOf(i.toString()) > -1){
+                    C.push(FRAKUR_REPLACE_LIST[i])
+                }else{
+                    C.push("&#" + (parseInt(font + i)) + ";");
+                }
+            }else{
+                C.push("&#" + (parseInt(font + i)) + ";");
+            }
+            
         } else {
             C.push(e);
         }
