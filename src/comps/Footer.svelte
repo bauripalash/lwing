@@ -27,6 +27,14 @@ let showCreditsModal = false;
 <footer>
 <p class="small-text"> 🇮🇳 Handcrafted by Palash Bauri 👻 </p>
 <p class="credit-text">| <a class="link-button" on:click="{() => showAboutModal = true}">About</a> | <a class="link-button" on:click="{() => showCreditsModal = true}">Credits</a> |</p>
+<div class="screw-head-icons-footer">
+                <svg height="10" width="10">
+                    <circle cx="5" cy="5" r="5" fill="#05c46b" />
+                </svg>
+                <svg height="10" width="10">
+                    <circle cx="5" cy="5" r="5" fill="#B33771" />
+                </svg>
+            </div>
 </footer>
 
 {#if showAboutModal}

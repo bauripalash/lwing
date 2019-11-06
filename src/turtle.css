@@ -129,19 +129,35 @@ input {
 
 .screw-head-icons{
     -webkit-flex: 1 0 auto;
--ms-flex: 1 0 auto;
-flex: 1 0 auto;
--webkit-box-pack: justify;
--webkit-justify-content: space-between;
--ms-flex-pack: justify;
-justify-content: space-between;
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
-width: 100%;
-font-size: 8px;
-padding: 0.5rem 0 0 0;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    font-size: 8px;
+    padding: 0.5rem 0 0 0;
+}
+.screw-head-icons-footer{
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    font-size: 8px;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 .intext{
@@ -151,6 +167,21 @@ padding: 0.5rem 0 0 0;
     border-bottom: 2px solid #55E6C1;
      resize: vertical;
      cursor: text;
+    min-height: 50px;
+    text-align: left;
+    padding: 5px;
+    max-width: 600px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.intext:empty:before{
+  content: attr(placeholder);
+  color: grey;
+  font-style: italic;
+  display: block; /* For Firefox */
+  font-size: 12px;
 }
 
 .topControls button {
@@ -164,6 +195,35 @@ padding: 0.5rem 0 0 0;
     padding: 4px 8px;
     border: 2px solid #FD7272;
     cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 99999999999;
+  font-size: 11px;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
 }
 
 .social-button{

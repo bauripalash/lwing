@@ -18,98 +18,8 @@ export let hasSelection = () => {
     }
 }
 
-// export let RST = rt => {
-//     let sel, range;
-//     if (window.getSelection) {
-//         sel = window.getSelection();
-//         if (sel.rangeCount) {
-//             range = sel.getRangeAt(0);
 
-//             if (document.queryCommandSupported('insertText')) {
-//                 document.execCommand('insertText', false, rt);
-//                 return true;
-//             } else {
-//                 range.deleteContents();
-//                 range.insertNode(document.createTextNode(rt));
-//                 return true;
-//             }
-//             // range.deleteContents();
-//             // range.insertNode(document.createTextNode(rt));
-//         }
-//     } else if (document.selection && document.selection.createRange) {
-//         range = document.selection.createRange();
-//         range.text = rt;
-//     }
-// }
-
-function getInputSelection(el) {
-    var start = 0,
-        end = 0,
-        normalizedValue, range,
-        textInputRange, len, endRange;
-
-    if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
-        start = el.selectionStart;
-        end = el.selectionEnd;
-    } else {
-        range = document.selection.createRange();
-
-        if (range && range.parentElement() == el) {
-            len = el.value.length;
-            normalizedValue = el.value.replace(/\r\n/g, "\n");
-
-            // Create a working TextRange that lives only in the input
-            textInputRange = el.createTextRange();
-            textInputRange.moveToBookmark(range.getBookmark());
-
-            // Check if the start and end of the selection are at the very end
-            // of the input, since moveStart/moveEnd doesn't return what we want
-            // in those cases
-            endRange = el.createTextRange();
-            endRange.collapse(false);
-
-            if (textInputRange.compareEndPoints("StartToEnd", endRange) > -1) {
-                start = end = len;
-            } else {
-                start = -textInputRange.moveStart("character", -len);
-                start += normalizedValue.slice(0, start).split("\n").length - 1;
-
-                if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
-                    end = len;
-                } else {
-                    end = -textInputRange.moveEnd("character", -len);
-                    end += normalizedValue.slice(0, end).split("\n").length - 1;
-                }
-            }
-        }
-    }
-
-    return {
-        start: start,
-        end: end
-    };
-}
-
-export function getSel() // javascript
-{
-    // obtain the object reference for the <textarea>
-    var txtarea = document.getElementById("intext");
-    // obtain the index of the first selected character
-    var start = txtarea.selectionStart;
-    // obtain the index of the last selected character
-    var finish = txtarea.selectionEnd;
-    // obtain the selected text
-    var sel = txtarea.value.substring(start, finish);
-    // do something with the selected content
-    return {
-        start: start,
-        end: finish,
-        sel: sel
-    };
-}
-
-
-function getSelectionHtml() {
+export function getSelectionHtml() {
     var html = "";
     if (typeof window.getSelection != "undefined") {
         var sel = window.getSelection();
@@ -131,8 +41,9 @@ function getSelectionHtml() {
 function replaceSelectionWithHtml(html) {
         var range;
         if (window.getSelection && window.getSelection().getRangeAt) {
-            console.log("X")
+            // console.log("X")
             range = window.getSelection().getRangeAt(0);
+            console.log("Range" , range);
             range.deleteContents();
             var div = document.createElement("div");
             div.innerHTML = html;
@@ -145,41 +56,19 @@ function replaceSelectionWithHtml(html) {
         } else if (document.selection && document.selection.createRange) {
             console.log("Y")
             range = document.selection.createRange();
+            console.log("Range" , range);
             range.pasteHTML(html);
         }
     }
 
 export function RST(font) {
-    // let el = document.getElementById("intext");
-    // var sel = getSel(), val = el.innerHTML;
-    // // console.log(sel , val);
-    // let x = document.createElement('div');
-    // x.innerHTML = Convert(font , sel.sel).join("");
-    // let z = x.innerHTML;
-    // console.log(Convert(font , sel.sel).join(""))
-
-    // document.execCommand('insertText', false, "hello")
-    // el.value = val.slice(0, sel.start) + "" + z + "" + val.slice(sel.end);
-
-    // console.log(el.innerHTML ,el.innerText , el.value);
-
-    // console.log(Convert(font , getSel()).join(''));
-    if (getSelectionHtml()){
+    if (getSelectionHtml() != ""){
         replaceSelectionWithHtml(Convert(font , getSelectionHtml()).join(""));
     }else{
         const grid = document.getElementById("intext");
         grid.innerHTML = Convert(font , grid.innerText).join("");
     }
 
-    
-
-    // if (document.selection && document.selection.createRange) {
-    //     range = document.selection.createRange();
-    //     range.text = font;
-    //     console.log("X")
-    // }else{
-    //     console.log("Y")
-    // }
 }
 
 // Office - 1,8,9
@@ -189,13 +78,6 @@ export function RST(font) {
 
 //----- END -------
 
-// function WriteAll(converted) {
-//     // Join string of new unicode characters
-//     let newString = converted.join('');
-//     const grid = document.getElementById("intext");
-//     // Add new characters to the grid
-//     grid.innerHTML = newString;
-// }
 
 // FONT LISTS
 //-------------------
@@ -216,6 +98,33 @@ let FRAKUR_REPLACE_LIST = {
 }
 //----- END ------ 
 
+
+export let copyText = containerid => {
+var elt = document.getElementById(containerid);
+    if (document.selection) { // IE
+        if(elt.nodeName.toLowerCase() === "input"){
+            document.getElementById(containerid).select();
+            document.execCommand("copy");
+        }else{
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select();
+            document.execCommand("copy");
+        } 
+
+    } else if (window.getSelection) {
+        if(elt.nodeName.toLowerCase() === "input"){
+            document.getElementById(containerid).select();
+            document.execCommand("copy");
+        }else{
+            var range_ = document.createRange();
+            range_.selectNode(document.getElementById(containerid));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range_);
+            document.execCommand("copy");
+    }
+}
+};
 
 
 // CONVERTERS

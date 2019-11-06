@@ -3,7 +3,8 @@
     import Whatsapp from './icons/Whatsapp.svelte';
     import FbMessenger from './icons/FbMessenger.svelte';
     import Clipboard from './icons/Clipboard.svelte';
-    import {ord , FONTS , RST , getRandomInt , Convert , hasSelection , getSel} from './transform.js';
+    import ShareNativeButton from './icons/ShareNativeButton.svelte';
+    import {FONTS , RST ,  copyText} from './transform.js';
     import './turtle.css';
 
     let office_visible = false; 
@@ -15,11 +16,24 @@
         window.open(url);
     }
 
+    let ShareClipboard = () =>{
+        copyText("intext")
+    }
 
+let ShareNative = () =>{
+    if (navigator.share) {
+    navigator.share({
+          title: 'Web Fundamentals',
+        text: 'Check out Web Fundamentals — it rocks!',
+        url: 'https://developers.google.com/web',
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    }
+
+}
 
 let Show_Office = () =>{
-    // document.getElementById("OfficeList").style.display = "block";
-    // RST(FONTS[5])
     if (office_visible){
         office_visible = false;
     }else{
@@ -74,50 +88,9 @@ window.onclick = function(event) {
 </script>
 
 <style>
-[contenteditable=true]:empty:before{
-  content: attr(placeholder);
-  color: grey;
-  font-style: italic;
-  display: block; /* For Firefox */
-  font-size: 12px;
-}
 
-.intext{
-    min-height: 50px;
-    text-align: left;
-    padding: 5px;
-    max-width: 600px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: block;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 99999999999;
-  font-size: 10px;
-}
 
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-  cursor: pointer;
-}
 
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
 
 </style>
 
@@ -151,9 +124,9 @@ window.onclick = function(event) {
                 </button>
                 {#if office_visible}
                 <div class="dropdown-content" id="OfficeList">
-                    <a on:click="{() => Format(0)}">𝙽𝚘𝚛𝚖𝚊𝚕</a>
-                    <a on:click="{() => Format(8)}">𝐁𝐨𝐥𝐝</a>
-                    <a on:click="{() => Format(7)}">𝑩𝒐𝒍𝒅 𝑰𝒕𝒂𝒍𝒊𝒄</a>
+                    <button on:click="{() => Format(0)}">𝙽𝚘𝚛𝚖𝚊𝚕</button>
+                    <button on:click="{() => Format(8)}">𝐁𝐨𝐥𝐝</button>
+                    <button on:click="{() => Format(7)}">𝑩𝒐𝒍𝒅 𝑰𝒕𝒂𝒍𝒊𝒄</button>
                     
                 </div>
                 {/if}
@@ -165,10 +138,10 @@ window.onclick = function(event) {
                 </button>
                 {#if casual_visible}
                 <div class="dropdown-content" id="CasualList">
-                    <a on:click="{() => Format(4)}">𝖭𝗈𝗋𝗆𝖺𝗅</a>
-                    <a on:click="{() => Format(3)}">𝗕𝗼𝗹𝗱</a>
-                    <a on:click="{() => Format(2)}">𝘐𝘵𝘢𝘭𝘪𝘤</a>
-                    <a on:click="{() => Format(1)}">𝘽𝙤𝙡𝙙 𝙄𝙩𝙖𝙡𝙞𝙘</a>
+                    <button on:click="{() => Format(4)}">𝖭𝗈𝗋𝗆𝖺𝗅</button>
+                    <button on:click="{() => Format(3)}">𝗕𝗼𝗹𝗱</button>
+                    <button on:click="{() => Format(2)}">𝘐𝘵𝘢𝘭𝘪𝘤</button>
+                    <button on:click="{() => Format(1)}">𝘽𝙤𝙡𝙙 𝙄𝙩𝙖𝙡𝙞𝙘</button>
                 </div>
                 {/if}
             </div>
@@ -179,8 +152,8 @@ window.onclick = function(event) {
                 </button>
                 {#if frakur_visible}
                 <div class="dropdown-content" id="FrakurList">
-                    <a on:click="{() => Format(9)}">𝔑𝔬𝔯𝔪𝔞𝔩</a>
-                    <a on:click="{() => Format(5)}">𝕭𝖔𝖑𝖉</a>
+                    <button on:click="{() => Format(9)}">𝔑𝔬𝔯𝔪𝔞𝔩</button>
+                    <button on:click="{() => Format(5)}">𝕭𝖔𝖑𝖉</button>
                 </div>
                 {/if}
             </div>
@@ -197,8 +170,8 @@ window.onclick = function(event) {
 
             <div class="bottomControls">
                 <button on:click="{() => ShareWA()}" class="social-button whatsapp"><Whatsapp/></button>
-                <button class="social-button messenger"><FbMessenger/></button>
-                <button class="social-button clipboard"><Clipboard/></button>
+                <button class="social-button clipboard" on:click="{() => ShareClipboard()}" ><Clipboard/></button>
+                <button class="social-button share" on:click="{() => ShareNative()}" ><ShareNativeButton/></button>
             </div>
         </div>
         <Footer/>
