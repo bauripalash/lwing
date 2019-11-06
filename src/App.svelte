@@ -10,6 +10,7 @@
     let office_visible = false; 
     let casual_visible = false;
     let frakur_visible = false;
+    let native_share = false;
 
     let ShareWA = () =>{
         let url = "whatsapp://send?text=" + document.getElementById("intext").innerHTML;
@@ -20,15 +21,33 @@
         copyText("intext")
     }
 
+let DesktopShare = (type) =>{
+    if (type == "fb"){
+        let url = "https://www.facebook.com/sharer/sharer.php?u=https://stupefied-hamilton-257b1c.netlify.com/&quote=" + document.getElementById("intext").innerHTML;
+        window.open(url);
+    }else if(type=="tw"){
+        let url = "https://twitter.com/intent/tweet?text=" + document.getElementById("intext").innerHTML;
+        window.open(url);
+    }
+}
+
 let ShareNative = () =>{
-    if (navigator.share) {
-    navigator.share({
-          title: 'Web Fundamentals',
-        text: 'Check out Web Fundamentals — it rocks!',
-        url: 'https://developers.google.com/web',
-      })
-        .then(() => console.log('Successful share'))
-        .catch((error) => console.log('Error sharing', error));
+    // console.log('Successful sharex')
+    if (navigator.share != undefined) {
+        // console.log('Successful sharey')
+        navigator.share({
+        text: document.getElementById("intext").innerHTML
+      });
+        // .then(() => console.log('Successful share'))
+        // .catch((error) => console.log('Error sharing', error));
+    }else{
+        if (native_share){
+             native_share = false;
+             // console.log('Successful sharez')
+       }else{
+             native_share = true;
+             // console.log('Successful share0')
+        }
     }
 
 }
@@ -83,6 +102,9 @@ window.onclick = function(event) {
         office_visible = false;
         casual_visible = false;
         frakur_visible = false;
+        
+  }else if(!event.target.matches('#ShareNativeButton')){
+    native_share = false;
   }
 }
 </script>
@@ -164,14 +186,21 @@ window.onclick = function(event) {
 
             </div>
 
-            <!-- <label for="intext" style="display: none;">Your Message</label> -->
-            <!-- <textarea name="intext" id="intext" class="intext" placeholder="Your Winged Message"></textarea> -->
             <div style="" contenteditable="true" id="intext" class="intext" placeholder="Your Winged Message" > </div>
 
             <div class="bottomControls">
                 <button on:click="{() => ShareWA()}" class="social-button whatsapp"><Whatsapp/></button>
                 <button class="social-button clipboard" on:click="{() => ShareClipboard()}" ><Clipboard/></button>
-                <button class="social-button share" on:click="{() => ShareNative()}" ><ShareNativeButton/></button>
+                <div class="dropdown">
+                <button class="dropbtn social-button share" id="ShareNativeButton" on:click="{() => ShareNative()}" ><ShareNativeButton/></button>
+
+                {#if native_share}
+                <div class="dropdown-content" id="ShareList">
+                    <button class="sharebtn facebook" on:click="{() => DesktopShare("fb")}">Facebook</button>
+                    <button class="sharebtn twitter" on:click="{() => DesktopShare("tw")}">Twitter</button>
+                </div>
+                {/if}
+                </div>  
             </div>
         </div>
         <Footer/>
