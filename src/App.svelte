@@ -132,7 +132,7 @@ window.onclick = function(event) {
                 </svg>
             </div>
             <small class="text-subbanner"> 📱 Text Mate 😻 </small>
-            <div class="text-banner"> Lacewing </div>
+            <div class="text-banner"> lwing </div>
             
         </div>
 

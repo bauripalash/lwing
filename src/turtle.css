@@ -110,7 +110,7 @@ input {
 }
 
 .text-banner{
-    
+    font-family: monospace;
     font-size: 2rem;
     /*font-weight: normal;*/
     line-height: 1.40rem;
