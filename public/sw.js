@@ -11,7 +11,7 @@ const PRECACHE_URLS  = [
   '/index.html',
   // '/android-chrome-192x192.png',
   // '/android-chrome-512x512.png',
-  '/apple-touch-icon.png',
+  // '/apple-touch-icon.png',
   '/bundle.css',
   '/bundle.css.map',
   '/bundle.js',
@@ -23,7 +23,7 @@ const PRECACHE_URLS  = [
   '/icons/share.png',
   '/icons/whatsapp.png',
   // '/logo.svg',
-  // '/manifest.json',
+  '/manifest.json'
   // '/mstile-150x150.png',
   // '/safari-pinned-tab.svg'
 ,
