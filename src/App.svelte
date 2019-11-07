@@ -4,13 +4,17 @@
     import FbMessenger from './icons/FbMessenger.svelte';
     import Clipboard from './icons/Clipboard.svelte';
     import ShareNativeButton from './icons/ShareNativeButton.svelte';
+    import Snackbar from './comps/Snackbar.svelte';
     import {FONTS , RST ,  copyText} from './transform.js';
     import './turtle.css';
 
     let office_visible = false; 
     let casual_visible = false;
     let frakur_visible = false;
+    let stylish_visible = false;
     let native_share = false;
+    let showSnack = false;
+    let snackmsg;
 
     let ShareWA = () =>{
         let url = "whatsapp://send?text=" + document.getElementById("intext").innerHTML;
@@ -18,8 +22,15 @@
     }
 
     let ShareClipboard = () =>{
-        copyText("intext")
+        copyText("intext");
+        Snack("Message Copied!");
     }
+
+let Snack = (msg) =>{
+    showSnack = true;
+    snackmsg = msg;
+    setTimeout(function(){ showSnack=false; }, 2000);
+}
 
 let DesktopShare = (type) =>{
     if (type == "fb"){
@@ -69,6 +80,7 @@ let Show_Casual = () =>{
         casual_visible = true;
         office_visible = false; 
         frakur_visible = false;
+        stylish_visible = false;
     }
 }
 
@@ -79,6 +91,18 @@ let Show_Frakur = () =>{
         frakur_visible = true;
         office_visible = false;
         casual_visible = false;
+        stylish_visible = false;
+    }
+}
+
+let Show_Stylish = () =>{
+    if (stylish_visible){
+        stylish_visible = false;
+    }else{
+        stylish_visible = true;
+        office_visible = false;
+        casual_visible = false;
+        frakur_visible = false;
     }
 }
 
@@ -86,6 +110,7 @@ let Close_ALL = () =>{
         office_visible = false;
         casual_visible = false;
         frakur_visible = false;
+        stylish_visible = false;
 }
 
 let Format = (n) =>{
@@ -99,9 +124,7 @@ let Format = (n) =>{
 
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
-        office_visible = false;
-        casual_visible = false;
-        frakur_visible = false;
+         Close_ALL();
         
   }else if(!event.target.matches('#ShareNativeButton')){
     native_share = false;
@@ -180,9 +203,17 @@ window.onclick = function(event) {
                 {/if}
             </div>
                 
-                <button on:click="{() => Format(6)}">𝓱𝓪𝓷𝓭𝔀𝓻𝓲𝓽𝓲𝓷𝓰 
+                <div class="dropdown">
+                <button class="dropbtn" on:click="{() => Show_Stylish()}">𝓢𝓽𝔂𝓵𝓲𝓼𝓱 &#9660; 
                     
                 </button>
+                {#if stylish_visible}
+                <div class="dropdown-content" id="FrakurList">
+                    <button on:click="{() => Format(6)}">𝓱𝓪𝓷𝓭𝔀𝓻𝓲𝓽𝓲𝓷𝓰</button>
+                    <button on:click="{() => Format(10)}">𝔻-𝕊𝕥𝕣𝕦𝕔𝕜</button>
+                </div>
+                {/if}
+                </div>
 
             </div>
 
@@ -204,6 +235,11 @@ window.onclick = function(event) {
             </div>
         </div>
         <Footer/>
+
+        {#if showSnack}
+            <Snackbar smsg={snackmsg}/>
+        {/if}
+
     </div>
 
 </div>

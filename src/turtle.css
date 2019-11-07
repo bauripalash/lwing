@@ -231,6 +231,9 @@ input {
 .social-button{
     /*border-radius: 50% !important;*/
     border: none;
+    padding: 2px;
+    margin-left: 5px;
+    margin-bottom: 0;
 }
 
 button.sharebtn {
@@ -238,7 +241,7 @@ button.sharebtn {
     font-size: 12px;
     border-radius: 16px;
     display: inline-block;
-    /*text-align: center;*/
+    text-align: center;
     color: #0e2877;
     background-color: white;
     padding: 4px 8px;
@@ -259,6 +262,11 @@ button:hover {
     background-color: cyan;
     color: black;
 }
+
+/*button.bottomControls{
+    padding: 0;
+    margin: 0;
+}*/
 
 .whatsapp:hover{
     background-color: #25D366 !important;

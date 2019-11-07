@@ -15,6 +15,9 @@ let showCreditsModal = false;
 
 .link-button{
     cursor: pointer;
+    color: rgb(0,100,200);
+    text-decoration: none;
+    display: inline-block;
 }
 
 .link-button:hover{
@@ -22,11 +25,12 @@ let showCreditsModal = false;
     font-weight: bolder;
 }
 
+
 </style>
 
 <footer>
 <p class="small-text"> 🇮🇳 Handcrafted by Palash Bauri 👻 </p>
-<p class="credit-text">| <a class="link-button" on:click="{() => showAboutModal = true}">About</a> | <a class="link-button" on:click="{() => showCreditsModal = true}">Credits</a> |</p>
+<span class="credit-text">| <p class="link-button" on:click="{() => showAboutModal = true}">About</p> | <p class="link-button" on:click="{() => showCreditsModal = true}">Credits</p> |</span>
 <div class="screw-head-icons-footer">
                 <svg height="10" width="10">
                     <circle cx="5" cy="5" r="5" fill="#05c46b" />

@@ -71,11 +71,6 @@ export function RST(font) {
 
 }
 
-// Office - 1,8,9
-// Casual - 2,3,4,5
-// Frakur - 6,10
-// Hand - 7
-
 //----- END -------
 
 
@@ -83,7 +78,7 @@ export function RST(font) {
 //-------------------
 
 // UNICODE FONT LIST
-export let FONTS = [120432, 120380, 120328, 120276, 120224, 120172, 120016, 119912, 119808 , 120068];
+export let FONTS = [120432, 120380, 120328, 120276, 120224, 120172, 120016, 119912, 119808 , 120068 , 120120];
 
 // ALPHABET LIST
 let ALPHAS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -95,6 +90,16 @@ let FRAKUR_REPLACE_LIST = {
     17 : "&#8476;" , //R
     25 : "&#8488;" //Z
 
+}
+
+let DSTRUCK_REPLACE_LIST = {
+    2 : "&#8450;", //C
+    7 : "&#8461;", //H
+    13 : "&#8469;", //N
+    15 : "&#8473;", //P
+    16 : "&#8474;", //Q
+    17 : "&#8477;", //R
+    25 : "&#8484;" //Z
 }
 //----- END ------ 
 
@@ -135,12 +140,21 @@ export let Convert = (font, string) => {
     string.split('').forEach(e => {
         let i = ALPHAS.indexOf(e);
         if (i > -1) {
-            if (font==120068){
+            if (font==120068){ //Frakur
                 if (Object.keys(FRAKUR_REPLACE_LIST).indexOf(i.toString()) > -1){
-                    C.push(FRAKUR_REPLACE_LIST[i])
+                    C.push(FRAKUR_REPLACE_LIST[i]);
                 }else{
                     C.push("&#" + (parseInt(font + i)) + ";");
                 }
+            }else if (font==120120) { //Double Struck aka. DStruck
+                if (Object.keys(DSTRUCK_REPLACE_LIST).indexOf(i.toString()) > -1){
+                    C.push(DSTRUCK_REPLACE_LIST[i]);
+                    console.log("X");
+                }else{
+                    C.push("&#" + (parseInt(font + i)) + ";");
+                    console.log("Y");
+                }
+
             }else{
                 C.push("&#" + (parseInt(font + i)) + ";");
             }
@@ -149,6 +163,6 @@ export let Convert = (font, string) => {
             C.push(e);
         }
     });
-
+    
     return C;
 }
