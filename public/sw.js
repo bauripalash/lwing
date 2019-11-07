@@ -9,23 +9,23 @@ const RUNTIME = 'lwing-runtime';
 const PRECACHE_URLS  = [
   './',
   '/index.html',
-  '/android-chrome-192x192.png',
-  '/android-chrome-512x512.png',
+  // '/android-chrome-192x192.png',
+  // '/android-chrome-512x512.png',
   '/apple-touch-icon.png',
   '/bundle.css',
   '/bundle.css.map',
   '/bundle.js',
   '/bundle.js.map',
-  '/favicon.ico',
-  '/favicon-32x32.png',
+  // '/favicon.ico',
+  // '/favicon-32x32.png',
   '/global.css',
   '/icons/clipboard.png',
   '/icons/share.png',
   '/icons/whatsapp.png',
-  '/logo.svg',
-  '/manifest.json',
-  '/mstile-150x150.png',
-  '/safari-pinned-tab.svg'
+  // '/logo.svg',
+  // '/manifest.json',
+  // '/mstile-150x150.png',
+  // '/safari-pinned-tab.svg'
 ,
 ];
 

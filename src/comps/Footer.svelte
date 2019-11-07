@@ -44,12 +44,22 @@ let showCreditsModal = false;
 {#if showAboutModal}
     <Modal on:close="{() => showAboutModal = false}">
         <h2 class="modal-header" slot="header">
-            About!
+           😺 About!
         </h2>
 
+
         <div class="modal-body" slot="body">   
-            
-            
+            <h3>🤔 What is lwing?</h3>
+            <p> lwing (Pronounced as "el-wing") is basically a unicode text styler. It takes your simple english input and converts it to some mathematical unicode charecters to make them look stylish and different.</p>
+            <!-- <br> -->
+            <h3>🤔 Where can I use lwing generated text?</h3>
+            <p>You can use lwing generated text mostly everywhere including Whatsapp , Facebook , Messenger, SMS and even at printing!
+
+
+            <h3>🤔 Who made lwing?</h3>
+            <p><a href="https://facebook.com/bauripalash">Palash Bauri</a> made lwing as a side project! You can contact him via <a target="_blank" href="https://instagram.com/bauripalash">[Instagram DM]</a>, <a target="_blank" href="https://m.me/bauripalash">[Messenger]</a> or <a target="_blank" href="mailto:heypalash@yandex.com">[Email]</a></p>
+            <!-- <h3>🤔 Do you want to contribute to this project?</h3>
+            <p> Though Development is completed , you can take a look at the Source Code Here  </p> -->
         </div>
 
         
@@ -65,6 +75,7 @@ let showCreditsModal = false;
         <div class="modal-body" slot="body">   
             <ul>
                 <li> Social Messaging App Icons from <a href="https://icons8.com">ICONS8</a> </li>
+
             </ul>
             
         </div>

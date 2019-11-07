@@ -16,22 +16,26 @@
     }
 
     .modal {
-        left:0;
-        right:0;
-        margin-left: auto;
-        margin-right: auto;
         position: absolute;
-        width: calc(100vw - 1em);
+        border-radius: 16px;
+        left: 50%;
+        top: 50%;
+        width: calc(100vw - 4em);
         max-width: 32em;
         max-height: calc(100vh - 4em);
         overflow: auto;
-        /*transform: translate(-50%,-50%);*/
+        transform: translate(-50%,-50%);
         padding: 1em;
-        border-radius: 16px;
+        /*border-radius: 0.2em;*/
         background: white;
+            -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.5s; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s; /* Internet Explorer */
+         -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
 
-         animation-name: slideIn;
-        animation-duration: 0.4s
+         /*animation-name: slideIn;*/
+        /*animation-duration: 0.4s*/
 
     }
 
@@ -39,17 +43,38 @@
         display: block;
         width: 80%;
         margin:auto;
+        border-radius: 16px;
+        border: 2px solid #55E6C1;
     }
 
 
-@-webkit-keyframes slideIn {
-  from {bottom: -300px; opacity: 0} 
-  to {bottom: 0; opacity: 1}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
-@keyframes slideIn {
-  from {bottom: -300px; opacity: 0}
-  to {bottom: 0; opacity: 1}
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 </style>
 
@@ -63,6 +88,7 @@
     <hr>
     <div class="button-close">
         <button on:click='{() => dispatch("close")}'>Close</button>
+        <br>
     </div>
     </div>
 </div>

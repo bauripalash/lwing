@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "dev": "export PORT=5678 && rollup -c -w",
+    "dev": "export PORT=5679 && rollup -c -w",
     "start": "sirv public --single",
     "start:dev": "sirv public --single --dev",
     "sk" : "rollup"
