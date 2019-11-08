@@ -19,6 +19,5 @@
     "dev": "export PORT=5679 && rollup -c -w",
     "start": "sirv public --single",
     "start:dev": "sirv public --single --dev",
-    "sk" : "rollup"
   }
 }

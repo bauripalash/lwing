@@ -5,9 +5,10 @@
     import Clipboard from './icons/Clipboard.svelte';
     import ShareNativeButton from './icons/ShareNativeButton.svelte';
     import Snackbar from './comps/Snackbar.svelte';
-    import {FONTS , RST ,  copyText} from './transform.js';
+    import {FONTS , RST ,  copyText , dc} from './transform.js';
     import './turtle.css';
 
+    let doAutoBackup = true;
     let office_visible = false; 
     let casual_visible = false;
     let frakur_visible = false;
@@ -15,9 +16,10 @@
     let native_share = false;
     let showSnack = false;
     let snackmsg;
+    let invalue;
 
     let ShareWA = () =>{
-        let url = "whatsapp://send?text=" + document.getElementById("intext").innerHTML;
+        let url = "whatsapp://send?text=" + document.getElementById("intext").innerText;
         window.open(url);
     }
 
@@ -34,10 +36,10 @@ let Snack = (msg) =>{
 
 let DesktopShare = (type) =>{
     if (type == "fb"){
-        let url = "https://www.facebook.com/sharer/sharer.php?u=https://stupefied-hamilton-257b1c.netlify.com/&quote=" + document.getElementById("intext").innerHTML;
+        let url = "https://www.facebook.com/sharer/sharer.php?u=https://stupefied-hamilton-257b1c.netlify.com/&quote=" + document.getElementById("intext").innerText;
         window.open(url);
     }else if(type=="tw"){
-        let url = "https://twitter.com/intent/tweet?text=" + document.getElementById("intext").innerHTML;
+        let url = "https://twitter.com/intent/tweet?text=" + document.getElementById("intext").innerText;
         window.open(url);
     }
 }
@@ -47,7 +49,7 @@ let ShareNative = () =>{
     if (navigator.share != undefined) {
         // console.log('Successful sharey')
         navigator.share({
-        text: document.getElementById("intext").innerHTML
+        text: document.getElementById("intext").innerText
       });
         // .then(() => console.log('Successful share'))
         // .catch((error) => console.log('Error sharing', error));
@@ -64,6 +66,7 @@ let ShareNative = () =>{
 }
 
 let Show_Office = () =>{
+    doAutoBackup = false;
     if (office_visible){
         office_visible = false;
     }else{
@@ -74,6 +77,7 @@ let Show_Office = () =>{
 }
 
 let Show_Casual = () =>{
+    doAutoBackup = false;
     if (casual_visible){
         casual_visible = false;
     }else{
@@ -85,6 +89,7 @@ let Show_Casual = () =>{
 }
 
 let Show_Frakur = () =>{
+    doAutoBackup = false;
     if (frakur_visible){
         frakur_visible = false;
     }else{
@@ -96,6 +101,7 @@ let Show_Frakur = () =>{
 }
 
 let Show_Stylish = () =>{
+    doAutoBackup = false;
     if (stylish_visible){
         stylish_visible = false;
     }else{
@@ -130,6 +136,36 @@ window.onclick = function(event) {
     native_share = false;
   }
 }
+
+window.onload = function() {
+  localStorage.clear();
+};
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    
+    try {
+        setInterval(() => {
+            localStorage.setItem("lbackup", document.getElementById("intext").innerText);
+        }, 800);
+    } catch (e) {
+        if (e == QUOTA_EXCEEDED_ERR) {
+            // alert('AutoSave Failed!');
+            console.log("AutoBackup Failed!");
+    }
+    
+}
+})
+
+let clearText = () =>{
+    invalue = "";
+    localStorage.clear();
+    Snack("Text Field is Cleared!");
+}
+
+// let doDC = () =>{
+//     // console.log(localStorage.getItem("lbackup").codePointAt(0) - 120432 );
+//     dc(FONTS[1] , localStorage.getItem("lbackup"))
+// }
 </script>
 
 <style>
@@ -214,10 +250,12 @@ window.onclick = function(event) {
                 </div>
                 {/if}
                 </div>
+                <div on:click="{() => clearText()}"><small class="button">Clear</small></div>
+                <!-- <button on:click="{() => doDC()}">DC</button> -->
 
             </div>
 
-            <div style="" contenteditable="true" id="intext" class="intext" placeholder="Your Winged Message" > </div>
+            <div bind:textContent={invalue} style="" contenteditable="true" id="intext" class="intext" placeholder="Your Winged Message" > </div>
 
             <div class="bottomControls">
                 <button on:click="{() => ShareWA()}" class="social-button whatsapp"><Whatsapp/></button>
@@ -234,6 +272,7 @@ window.onclick = function(event) {
                 </div>  
             </div>
         </div>
+
         <Footer/>
 
         {#if showSnack}
