@@ -45,7 +45,6 @@ let DesktopShare = (type) =>{
 }
 
 let ShareNative = () =>{
-    // console.log('Successful sharex')
     if (navigator.share != undefined) {
         // console.log('Successful sharey')
         navigator.share({
@@ -56,10 +55,8 @@ let ShareNative = () =>{
     }else{
         if (native_share){
              native_share = false;
-             // console.log('Successful sharez')
        }else{
              native_share = true;
-             // console.log('Successful share0')
         }
     }
 
@@ -120,7 +117,6 @@ let Close_ALL = () =>{
 }
 
 let Format = (n) =>{
-        // document.getElementById("intext").innerHTML = "T"
         RST(FONTS[n])
         office_visible = false;
         casual_visible = false;
@@ -149,7 +145,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }, 800);
     } catch (e) {
         if (e == QUOTA_EXCEEDED_ERR) {
-            // alert('AutoSave Failed!');
             console.log("AutoBackup Failed!");
     }
     
@@ -162,10 +157,6 @@ let clearText = () =>{
     Snack("Text Field is Cleared!");
 }
 
-// let doDC = () =>{
-//     // console.log(localStorage.getItem("lbackup").codePointAt(0) - 120432 );
-//     dc(FONTS[1] , localStorage.getItem("lbackup"))
-// }
 </script>
 
 <style>
@@ -175,12 +166,9 @@ let clearText = () =>{
 
 </style>
 
-<div class="pagebody" on:click="">
+<div class="pagebody" id="pagebody" on:click="">
 
     <div class="main">
-        <!-- <img src="./left_wing.svg"><h1> lacewing </h1><img src="./right_wing.svg"> 
-        -->
-        <!-- <img src="./banner.png" alt="lacewing" class="banner"> -->
         <div class="banner-container">
             <div class="screw-head-icons">
                 <svg height="10" width="10">
@@ -250,8 +238,7 @@ let clearText = () =>{
                 </div>
                 {/if}
                 </div>
-                <div on:click="{() => clearText()}"><small class="button">Clear</small></div>
-                <!-- <button on:click="{() => doDC()}">DC</button> -->
+                <div><small class="button" on:click="{() => clearText()}">Clear</small></div>
 
             </div>
 

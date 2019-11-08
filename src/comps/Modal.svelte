@@ -26,6 +26,7 @@
         overflow: auto;
         transform: translate(-50%,-50%);
         padding: 1em;
+        border: 2px solid #1B9CFC;
         /*border-radius: 0.2em;*/
         background: white;
             -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */

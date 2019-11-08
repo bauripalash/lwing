@@ -7,8 +7,9 @@ body {
     margin: 2em;
     margin: auto;
     text-align: center;
-    background: whitesmoke;
+    background: #070916;
 }
+
 
 h1,
 .h1 {
@@ -55,6 +56,7 @@ form,
     padding: 0px 10px 5px 10px;
     margin: 8px auto 8px;
     border: solid 2px #2C3A47;
+    background-color: white;
     /*box-shadow: 5px 6px 0px #0e2877;*/
     box-shadow: 8px 8px 0 0 #f7d794;
     width: 95%;

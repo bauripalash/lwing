@@ -1,5 +1,5 @@
 Arguments: 
-  /home/palash/.nvm/versions/node/v10.16.0/bin/node /home/palash/.yarn/bin/yarn.js add punnycode -D
+  /home/palash/.nvm/versions/node/v10.16.0/bin/node /home/palash/.yarn/bin/yarn.js dev
 
 PATH: 
   /home/palash/go/bin:/home/palash/work/bin:/home/palash/.yarn/bin:/home/palash/.config/yarn/global/node_modules/.bin:/home/palash/opt/LuaDist/bin:/home/palash/anaconda3/bin:/home/palash/.local/bin:/home/palash/.nvm/versions/node/v10.16.0/bin:/home/palash/.cargo/bin:/home/palash/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,17 +14,12 @@ Platform:
   linux ia32
 
 Trace: 
-  Error: https://registry.yarnpkg.com/punnycode: Not found
-      at Request.params.callback [as _callback] (/home/palash/.yarn/lib/cli.js:66926:18)
-      at Request.self.callback (/home/palash/.yarn/lib/cli.js:140564:22)
-      at Request.emit (events.js:198:13)
-      at Request.<anonymous> (/home/palash/.yarn/lib/cli.js:141536:10)
-      at Request.emit (events.js:198:13)
-      at IncomingMessage.<anonymous> (/home/palash/.yarn/lib/cli.js:141458:12)
-      at Object.onceWrapper (events.js:286:20)
-      at IncomingMessage.emit (events.js:203:15)
-      at endReadableNT (_stream_readable.js:1129:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  SyntaxError: /home/palash/Desktop/lwing/package.json: Unexpected token } in JSON at position 590
+      at JSON.parse (<anonymous>)
+      at /home/palash/.yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/home/palash/.yarn/lib/cli.js:304:30)
+      at /home/palash/.yarn/lib/cli.js:315:13
 
 npm manifest: 
   {
@@ -48,7 +43,6 @@ npm manifest:
       "dev": "export PORT=5679 && rollup -c -w",
       "start": "sirv public --single",
       "start:dev": "sirv public --single --dev",
-      "sk" : "rollup"
     }
   }
 

@@ -2,6 +2,7 @@
 import Modal from './Modal.svelte';
 let showAboutModal = false;
 let showCreditsModal = false;
+
 </script>
 
 <style>
@@ -35,6 +36,7 @@ let showCreditsModal = false;
                 <svg height="10" width="10">
                     <circle cx="5" cy="5" r="5" fill="#05c46b" />
                 </svg>
+                <a style="color:#B33771" href="https://support.cloudflare.com/hc/en-us/articles/200170156-Understanding-the-Cloudflare-Cookies#12345683" target="_blank">This site uses cookie to detect malicious visitors.</a>
                 <svg height="10" width="10">
                     <circle cx="5" cy="5" r="5" fill="#B33771" />
                 </svg>
@@ -73,10 +75,10 @@ let showCreditsModal = false;
         </h2>
 
         <div class="modal-body" slot="body">   
-            <ul>
-                <li> Social Messaging App Icons from <a href="https://icons8.com">ICONS8</a> </li>
+            <!-- <ul> -->
+               <p>😊 Social Messaging App Icons from <a href="https://icons8.com">ICONS8</a></p>
 
-            </ul>
+            <!-- </ul> -->
             
         </div>
 
