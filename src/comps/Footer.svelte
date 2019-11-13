@@ -60,6 +60,7 @@ let showCreditsModal = false;
 
             <h3>🤔 Who made lwing?</h3>
             <p><a href="https://facebook.com/bauripalash">Palash Bauri</a> made lwing as a side project! You can contact him via <a target="_blank" href="https://instagram.com/bauripalash">[Instagram DM]</a>, <a target="_blank" href="https://m.me/bauripalash">[Messenger]</a> or <a target="_blank" href="mailto:heypalash@yandex.com">[Email]</a></p>
+            <p> If you want to support my work , you can donate by Paypal at <a href="https://paypal.me/bauripalash">paypal.me/bauripalash</a> or via Paytm (If Indian citizen) at <a href="https://p-y.tm/9V-oX9y">p-y.tm/9V-oX9y</a> 😊😻!!</p>
             <!-- <h3>🤔 Do you want to contribute to this project?</h3>
             <p> Though Development is completed , you can take a look at the Source Code Here  </p> -->
         </div>
