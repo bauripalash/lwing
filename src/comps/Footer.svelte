@@ -56,7 +56,9 @@ let showCreditsModal = false;
             <!-- <br> -->
             <h3>🤔 Where can I use lwing generated text?</h3>
             <p>You can use lwing generated text mostly everywhere including Whatsapp , Facebook , Messenger, SMS and even at printing!
-
+            
+             <h3>🤔 How Can I Use Lwing?</h3>
+             <p> It's fairly simple to use Lwing. But if you want to use you can <a href="https://github.com/bauripalash/lwing/wiki" target="_blank">Read Lwing User Manual</a></p>
 
             <h3>🤔 Who made lwing?</h3>
             <p><a href="https://facebook.com/bauripalash">Palash Bauri</a> made lwing as a side project! You can contact him via <a target="_blank" href="https://instagram.com/bauripalash">[Instagram DM]</a>, <a target="_blank" href="https://m.me/bauripalash">[Messenger]</a> or <a target="_blank" href="mailto:heypalash@yandex.com">[Email]</a></p>
