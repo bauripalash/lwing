@@ -7,6 +7,9 @@ It takes your simple english input and converts it to some mathematical unicode 
 ## 🔥 Where can I use lwing generated text?
 You can use lwing generated text mostly everywhere including Whatsapp , Facebook , Messenger, SMS and even at printing!
 
+## 🤔 How to Use Lwing?
+User Manual can be found on [📓 Wiki](https://github.com/bauripalash/lwing/wiki)
+
 ## 🔥 What Stack does lwing use?
 * Svelte
 * HTML
